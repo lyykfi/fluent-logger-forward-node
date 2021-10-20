@@ -12,6 +12,8 @@ import * as protocol from "./protocol";
 import {PassThrough, Duplex} from "stream";
 import {awaitNextTick} from "./util";
 
+const KEEPALIVE_INTERVAL = 15 * 1000;
+
 /**
  * Reconnection settings for the socket
  *
@@ -427,6 +429,8 @@ export class FluentSocket extends EventEmitter {
       return socket;
     } else {
       const socket = this.createTcpSocket();
+
+      socket.setKeepAlive(true, KEEPALIVE_INTERVAL);
       socket.once("connect", onConnect);
       return socket;
     }
