@@ -190,7 +190,7 @@ export class FluentServer extends EventEmitter {
             const pong = protocol.generatePong(
               this.security.serverHostname,
               false,
-              e.message,
+              (e as any).message,
               clientInfo.sharedKeyInfo
             );
             socket.write(protocol.encodeMessage(pong));

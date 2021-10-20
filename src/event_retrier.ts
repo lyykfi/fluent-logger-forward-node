@@ -120,7 +120,7 @@ export class EventRetrier {
           throw e;
         }
 
-        this.options.onError(e);
+        this.options.onError(e as any);
 
         const retryInterval = Math.min(
           this.options.maxDelay,
